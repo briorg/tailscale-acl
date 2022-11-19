@@ -1,3 +1,5 @@
+// ACLs are maintained in https://github.com/briorg/tailscale-acl/blob/main/policy.hujson
+//
 // Example/default ACLs for unrestricted connections.
 {
 	// Declare static groups of users beyond those in the identity service.
