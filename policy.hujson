@@ -5,8 +5,16 @@
 	// Declare static groups of users beyond those in the identity service.
 	"groups": {
 		"group:example": ["user1@example.com", "user2@example.com"],
+		"group:can-funnel": [
+			"b-@github",
+		],
 	},
-
+	"nodeAttrs": [
+		{
+			"target": ["group:can-funnel"],
+			"attr":   ["funnel"],
+		},
+	],
 	// Declare convenient hostname aliases to use in place of IP addresses.
 	"hosts": {
 		"example-host-1": "100.100.100.100",
