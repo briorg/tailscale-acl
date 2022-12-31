@@ -9,7 +9,7 @@
 		"tag:home": [
 			"autogroup:members"
 		],
-		"tag:vyos":
+		"tag:vyos":[
 			"autogroup:members"
 		],
 		"tag:docker": [
