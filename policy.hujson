@@ -5,16 +5,21 @@
 	"tagOwners": {
 		"tag:ms-lab": [
 			"autogroup:members"
+		],
+		"tag:home": [
+			"autogroup:members"
+		],
+		"tag:vyos":
+			"autogroup:members"
+		],
+		"tag:docker": [
+			"autogroup:members"
 		]
 	},
 	// Declare static groups of users beyond those in the identity service.
 	"groups": {
-		"group:example": [
-			"user1@example.com",
-			"user2@example.com"
-		],
 		"group:can-funnel": [
-			"b-@github",
+			"b-@github"
 		],
 	},
 	"nodeAttrs": [
