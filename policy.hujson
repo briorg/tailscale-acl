@@ -4,34 +4,34 @@
 {
 	"tagOwners": {
 		"tag:ms-lab": [
-			"autogroup:members"
+			"autogroup:members",
 		],
 		"tag:home": [
-			"autogroup:members"
+			"autogroup:members",
 		],
-		"tag:vyos":[
-			"autogroup:members"
+		"tag:vyos": [
+			"autogroup:members",
 		],
 		"tag:docker": [
-			"autogroup:members"
+			"autogroup:members",
 		],
-		"tag:proxmox":[
-			"autogroup:members"
-		]
+		"tag:proxmox": [
+			"autogroup:members",
+		],
 	},
 	// Declare static groups of users beyond those in the identity service.
 	"groups": {
 		"group:can-funnel": [
-			"b-@github"
+			"b-@github",
 		],
 	},
 	"nodeAttrs": [
 		{
 			"target": [
-				"group:can-funnel"
+				"group:can-funnel",
 			],
 			"attr": [
-				"funnel"
+				"funnel",
 			],
 		},
 	],
@@ -46,11 +46,11 @@
 		{
 			"action": "accept",
 			"users": [
-				"*"
+				"*",
 			],
 			"ports": [
-				"*:*"
-			]
+				"*:*",
+			],
 		},
 	],
 	"ssh": [
@@ -59,14 +59,15 @@
 		{
 			"action": "check",
 			"src": [
-				"autogroup:members"
+				"autogroup:members",
 			],
 			"dst": [
-				"autogroup:self"
+				"autogroup:self",
+				"tag:proxmox",
 			],
 			"users": [
 				"autogroup:nonroot",
-				"root"
+				"root",
 			],
 		},
 	],
