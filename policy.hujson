@@ -15,9 +15,9 @@
 		"tag:docker": [
 			"autogroup:members"
 		],
-		"tag:proxmox": ]
+		"tag:proxmox":[
 			"autogroup:members"
-			]
+		]
 	},
 	// Declare static groups of users beyond those in the identity service.
 	"groups": {
