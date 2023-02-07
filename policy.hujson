@@ -32,6 +32,7 @@
 		{
 			"target": [
 				"group:can-funnel",
+				"tag:home",
 			],
 			"attr": [
 				"funnel",
