@@ -24,6 +24,9 @@
 		"group:can-funnel": [
 			"b-@github",
 		],
+		"group:home-user": [
+			"b-@github",
+		],
 	},
 	"nodeAttrs": [
 		{
@@ -60,6 +63,7 @@
 			"action": "check",
 			"src": [
 				"autogroup:members",
+				"group:home-user",
 			],
 			"dst": [
 				"autogroup:self",
