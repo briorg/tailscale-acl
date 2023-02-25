@@ -73,6 +73,8 @@
 			"dst": [
 				"autogroup:self",
 				"tag:proxmox",
+				"tag:free",
+	
 			],
 			"users": [
 				"autogroup:nonroot",
