@@ -18,6 +18,9 @@
 		"tag:proxmox": [
 			"autogroup:members",
 		],
+		"tag:untrusted": [
+			"autogroup:members",
+		],
 	},
 	// Declare static groups of users beyond those in the identity service.
 	"groups": {
