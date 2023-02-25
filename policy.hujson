@@ -18,7 +18,7 @@
 		"tag:proxmox": [
 			"autogroup:members",
 		],
-		"tag:untrusted": [
+		"tag:free": [
 			"autogroup:members",
 		],
 	},
@@ -36,6 +36,7 @@
 			"target": [
 				"group:can-funnel",
 				"tag:home",
+				"tag:free",
 			],
 			"attr": [
 				"funnel",
