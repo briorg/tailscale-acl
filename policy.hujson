@@ -20,7 +20,7 @@
 		],
 		"tag:free": [
 			"autogroup:members",
-		],
+		],		"tag:dev": ["group:devel"]
 	},
 	// Declare static groups of users beyond those in the identity service.
 	"groups": {
@@ -28,6 +28,9 @@
 			"b-@github",
 		],
 		"group:home-user": [
+			"b-@github",
+		],
+		"group:devel": [
 			"b-@github",
 		],
 	},
@@ -45,7 +48,7 @@
 	],
 	// Declare convenient hostname aliases to use in place of IP addresses.
 	"hosts": {
-		"example-host-1": "100.100.100.100",
+		"ts-dns": "100.100.100.100",
 	},
 	// Access control lists.
 	"acls": [
@@ -64,6 +67,15 @@
 	"ssh": [
 		// Allow all users to SSH into their own devices in check mode.
 		// Comment this section out if you want to define specific restrictions.
+		{
+			"action": "accept",
+			"src": ["group:devel"],
+			"dst": ["tag:dev"],
+			"users": [
+					"autogroup:nonroot",
+					"root",
+			],
+		},
 		{
 			"action": "check",
 			"src": [
