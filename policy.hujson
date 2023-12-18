@@ -20,7 +20,13 @@
 		],
 		"tag:free": [
 			"autogroup:members",
-		],		"tag:dev": ["group:devel"]
+		],
+		"tag:dev": [
+			"group:devel"
+		],
+		"tag:github-runner": [
+			"group:devel"
+		]
 	},
 	// Declare static groups of users beyond those in the identity service.
 	"groups": {
