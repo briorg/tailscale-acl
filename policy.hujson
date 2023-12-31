@@ -18,6 +18,7 @@
   // },
   "tagOwners": {
     "tag:dev": ["group:devel"],
+	"tag:dn42": [],
     "tag:dns-server": ["group:prod"],
     "tag:dns-update": ["group:devel"],
     "tag:docker": ["group:devel"],
@@ -36,7 +37,7 @@
 
   "autoApprovers": {
     "routes": {
-      "172.20.0.0/14": ["tag:router"]
+      "172.20.0.0/14": ["tag:dn42"]
     },
     "exitNode": [
 		"tag:router",
