@@ -10,7 +10,7 @@
     "group:can-funnel": ["b-@github"],
     "group:devel": ["b-@github"],
     "group:home-user": ["b-@github"],
-    "group:prod": ["b-@github"]
+    "group:prod": ["b-@github"],
   },
   // Define the tags which can be applied to devices and by which users.
   // "tagOwners": {
@@ -30,7 +30,8 @@
     "tag:ingress": ["group:prod"],
     "tag:router": [],
     "tag:vyos": ["group:devel"],
-    "tag:internet": ["autogroup:member"]
+    "tag:internet": ["autogroup:member"],
+    "tag:external": [],
   },
 
   "autoApprovers": {
@@ -175,15 +176,11 @@
       "accept": [
         "tag:dev:80",
         "tag:prod:80",
-		"tag:ingress:443",
+        "tag:ingress:443",
         "tag:hypervisor:8006",
-        "tag:router:22",
+        "tag:router:22"
       ]
     },
-	{"src":"group:github-runner",
-	"accept": [
-		"tag:dns-server:53"
-	]
-}
+    { "src": "group:github-runner", "accept": ["tag:dns-server:53"] }
   ]
 }
