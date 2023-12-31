@@ -38,7 +38,12 @@
     "routes": {
       "172.20.0.0/14": ["tag:router"]
     },
-    "exitNode": ["tag:router", "tag:github-runner", "autogroup:admin"]
+    "exitNode": [
+		"tag:router",
+		"tag:github-runner",
+		"autogroup:admin",
+		"tag:external",
+	]
   },
 
   // Define access control lists for users, groups, autogroups, tags,
