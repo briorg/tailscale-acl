@@ -1,34 +1,11 @@
 // ACLs are maintained in https://github.com/briorg/tailscale-acl/blob/main/policy.hujson
-//
+
 // Example/default ACLs for unrestricted connections.
 {
-	"tagOwners": {
-		"tag:ms-lab": [
-			"autogroup:members",
-		],
-		"tag:home": [
-			"autogroup:members",
-		],
-		"tag:vyos": [
-			"autogroup:members",
-		],
-		"tag:docker": [
-			"autogroup:members",
-		],
-		"tag:proxmox": [
-			"autogroup:members",
-		],
-		"tag:free": [
-			"autogroup:members",
-		],
-		"tag:dev": [
-			"group:devel"
-		],
-		"tag:github-runner": [
-			"group:devel"
-		]
-	},
-	// Declare static groups of users beyond those in the identity service.
+	// Declare static groups of users. Use autogroups for all users or users with a specific role.
+	// "groups": {
+	//  	"group:example": ["alice@example.com", "bob@example.com"],
+	// },
 	"groups": {
 		"group:can-funnel": [
 			"b-@github",
@@ -40,6 +17,30 @@
 			"b-@github",
 		],
 	},
+	// Define the tags which can be applied to devices and by which users.
+	// "tagOwners": {
+	//  	"tag:example": ["autogroup:admin"],
+	// },
+	"tagOwners": {
+		"tag:dev": [ "group:devel" ],
+		"tag:docker": [ "group:devel", ],
+		"tag:free": [ "group:devel", ],
+		"tag:github-runner": [ "group:devel" ],
+		"tag:home": [ "autogroup:admin", ],
+		"tag:hypervisor": [ "group:devel", ],
+		"tag:proxmox": [ "group:devel", ],
+		"tag:router": [ "group:devel", ],
+		"tag:vyos": [ "group:devel", ],
+	},
+
+	// Define access control lists for users, groups, autogroups, tags,
+	// Tailscale IP addresses, and subnet ranges.
+	"acls": [
+		// Allow all connections.
+		// Comment this section out if you want to define specific restrictions.
+		{"action": "accept", "src": ["*"], "dst": ["*:*"]},
+	],
+
 	"nodeAttrs": [
 		{
 			"target": [
@@ -52,52 +53,54 @@
 			],
 		},
 	],
+
 	// Declare convenient hostname aliases to use in place of IP addresses.
 	"hosts": {
 		"ts-dns": "100.100.100.100",
 	},
-	// Access control lists.
-	"acls": [
-		// Match absolutely everything.
-		// Comment this section out if you want to define specific restrictions.
-		{
-			"action": "accept",
-			"users": [
-				"*",
-			],
-			"ports": [
-				"*:*",
-			],
-		},
-	],
+
+	// Define users and devices that can use Tailscale SSH.
 	"ssh": [
-		// Allow all users to SSH into their own devices in check mode.
-		// Comment this section out if you want to define specific restrictions.
-		{
+		{ // ACCEPT group:devel => tag:dev
 			"action": "accept",
 			"src": ["group:devel"],
-			"dst": ["tag:dev"],
+			"dst": [
+				"tag:dev",
+				"tag:docker",
+				"tag:github-runner",
+				"tag:hypervisor",
+				"tag:router",
+			],
 			"users": [
 					"autogroup:nonroot",
 					"root",
 			],
 		},
-		{
+		{ // CHECK autogroup:admin => *
 			"action": "check",
-			"src": [
-				"autogroup:members",
-				"group:home-user",
-			],
-			"dst": [
-				"autogroup:self",
-				"tag:proxmox",
-				"tag:free",
-	
-			],
+			"src": ["autogroup:admin"],
+			"dst": ["*"],
 			"users": [
-				"autogroup:nonroot",
-				"root",
+					"autogroup:nonroot",
+					"root",
 			],
 		},
+		// Allow all users to SSH into their own devices in check mode.
+		// Comment this section out if you want to define specific restrictions.
+		{
+			"action": "check",
+			"src":    ["autogroup:member"],
+			"dst":    ["autogroup:self"],
+			"users":  ["autogroup:nonroot", "root"],
+		},
 	],
+
+	// Test access rules every time they're saved.
+	// "tests": [
+	//  	{
+	//  		"src": "alice@example.com",
+	//  		"accept": ["tag:example"],
+	//  		"deny": ["100.101.102.103:443"],
+	//  	},
+	// ],
 }
