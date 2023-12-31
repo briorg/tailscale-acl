@@ -46,7 +46,7 @@
   "acls": [
     // Allow all connections.
     // Comment this section out if you want to define specific restrictions.
-    { "action": "accept", "src": ["*"], "dst": ["*:*"] },
+    //{ "action": "accept", "src": ["*"], "dst": ["*:*"] },
 
     {
       "action": "accept",
@@ -181,6 +181,7 @@
         "tag:router:22"
       ]
     },
-    { "src": "group:github-runner", "accept": ["tag:dns-server:53"] }
+    { "src": "group:github-runner", "accept": ["tag:dns-server:53"] },
+	{ "src": "group:external", "deny": ["tag:hypervisor:8006"]},
   ]
 }
