@@ -34,7 +34,22 @@
     "tag:internet": ["autogroup:member"],
     "tag:external": [],
   },
-
+  "grants": [
+    {
+      "src": ["group:admin"],
+      "dst": ["*"],
+      "ip": ["5252"],
+      "app": {
+        "tailscale.com/cap/webui": [
+          {
+            // Grants user@example.com edit access to "tag:dev" devices' web interfaces.
+            //"canEdit": ["ssh", "subnets"]
+            "canEdit": ["*"]
+          }
+        ]
+      }
+    }
+  ],
   "autoApprovers": {
     "routes": {
       "172.20.0.0/14": ["tag:dn42"]
