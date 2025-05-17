@@ -18,6 +18,7 @@
   // },
   "tagOwners": {
     "tag:dev": ["group:devel"],
+    "tag:periphery": ["group:devel"],
 	"tag:dn42": [],
     "tag:dns-server": ["group:prod"],
     "tag:dns-update": ["group:devel"],
@@ -73,6 +74,12 @@
       "action": "accept",
       "src": ["*"],
       "dst": ["tag:ingress:443"]
+    },
+
+    {
+      "action": "accept",
+      "src": ["*"],
+      "dst": ["tag:periphery:8120"]
     },
 
     {
