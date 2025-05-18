@@ -152,6 +152,8 @@
 			"action": "accept",
 			"src":    ["group:devel"],
 			"dst": [
+				"group:devel",
+				"tag:periphery",
 				"tag:dev",
 				"tag:docker",
 				"tag:github-runner",
