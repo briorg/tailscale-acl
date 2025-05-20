@@ -34,6 +34,7 @@
 		"tag:prod":          ["group:prod"],
 		"tag:proxmox":       [],
 		"tag:router":        [],
+		"tag:tsdproxy":      ["group:devel"],
 		"tag:vyos":          ["group:devel"],
 	},
 	"grants": [
