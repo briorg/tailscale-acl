@@ -10,6 +10,7 @@
 		"group:can-funnel": ["b-@github"],
 		"group:devel":      ["b-@github"],
 		"group:home-user":  ["b-@github"],
+		"group:komodo-admin": ["b-@github"],
 		"group:prod":       ["b-@github"],
 	},
 	// Define the tags which can be applied to devices and by which users.
@@ -29,8 +30,9 @@
 		"tag:hypervisor":    ["group:devel"],
 		"tag:ingress":       ["group:prod"],
 		"tag:internet":      ["autogroup:member"],
+		"tag:komodo-core":   ["group:komodo-admin"],
+		"tag:periphery": ["group:komodo-admin", "group:devel"],
 		"tag:op-connect":    ["group:devel"],
-		"tag:periphery":     ["group:devel"],
 		"tag:prod":          ["group:prod"],
 		"tag:proxmox":       [],
 		"tag:router":        [],
@@ -51,6 +53,16 @@
 					},
 				],
 			},
+		},
+		{ // grant access to komodo core ui port 9120 and 443 to komodo-admin
+		"src": ["group:komodo-admin"],
+		"dst": ["tag:komodo-core"],
+		"ip": ["9120", "443"],
+		},
+		{ // grant access to komodo periphery port 8120 and 443 to komodo core
+		"src": ["tag:komodo-core"],
+		"dst": ["tag:periphery"],
+		"ip": ["9120", "443"],
 		},
 	],
 	"autoApprovers": {
@@ -128,6 +140,12 @@
 				"tag:ingress",
 				"tag:dns-server",
 				"tag:router",
+			],
+			"attr": ["funnel"],
+		},
+		{
+			"target": [
+				"tag:komodo-core",
 			],
 			"attr": ["funnel"],
 		},
