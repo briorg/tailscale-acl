@@ -1,236 +1,252 @@
 // ACLs are maintained in https://github.com/briorg/tailscale-acl/blob/main/policy.hujson
 
 {
-	// Declare static groups of users. Use autogroups for all users or users with a specific role.
-	// "groups": {
-	//  	"group:example": ["alice@example.com", "bob@example.com"],
-	// },
-	"groups": {
-		"group:admin":      ["b-@github"],
-		"group:can-funnel": ["b-@github"],
-		"group:devel":      ["b-@github"],
-		"group:home-user":  ["b-@github"],
-		"group:komodo-admin": ["b-@github"],
-		"group:prod":       ["b-@github"],
-	},
-	// Define the tags which can be applied to devices and by which users.
-	// "tagOwners": {
-	//  	"tag:example": ["autogroup:admin"],
-	// },
-	"tagOwners": {
-		"tag:dev":           ["group:devel"],
-		"tag:dn42":          [],
-		"tag:dns-server":    ["group:prod"],
-		"tag:dns-update":    ["group:devel"],
-		"tag:docker":        ["group:devel"],
-		"tag:external":      [],
-		"tag:free":          ["group:devel"],
-		"tag:github-runner": ["group:devel"],
-		"tag:home":          [],
-		"tag:hypervisor":    ["group:devel"],
-		"tag:ingress":       ["group:prod"],
-		"tag:internet":      ["autogroup:member"],
-		"tag:komodo-core":   ["group:komodo-admin"],
-		"tag:periphery": ["group:komodo-admin", "group:devel"],
-		"tag:op-connect":    ["group:devel"],
-		"tag:prod":          ["group:prod"],
-		"tag:proxmox":       [],
-		"tag:router":        [],
-		"tag:tsdproxy":      ["group:devel"],
-		"tag:vyos":          ["group:devel"],
-	},
-	"grants": [
-		{
-			"src": ["group:admin"],
-			"dst": ["*"],
-			"ip":  ["5252"],
-			"app": {
-				"tailscale.com/cap/webui": [
-					{
-						// Grants user@example.com edit access to "tag:dev" devices' web interfaces.
-						//"canEdit": ["ssh", "subnets"]
-						"canEdit": ["*"],
-					},
-				],
-			},
-		},
-		{ // grant access to komodo core ui port 9120 and 443 to komodo-admin
-		"src": ["group:komodo-admin"],
-		"dst": ["tag:komodo-core"],
-		"ip": ["9120", "443"],
-		},
-		{ // grant access to komodo periphery port 8120 and 443 to komodo core
-		"src": ["tag:komodo-core"],
-		"dst": ["tag:periphery"],
-		"ip": ["9120", "443"],
-		},
-	],
-	"autoApprovers": {
-		"routes": {
-			"172.20.0.0/14": ["tag:dn42"],
-		},
-		"exitNode": [
-			"tag:router",
-			"tag:github-runner",
-			"autogroup:admin",
-			"tag:external",
-		],
-	},
+  // Declare static groups of users. Use autogroups for all users or users with a specific role.
+  // "groups": {
+  //  	"group:example": ["alice@example.com", "bob@example.com"],
+  // },
+  "groups": {
+    "group:admin":        ["b-@github"],
+    "group:can-funnel":   ["b-@github"],
+    "group:devel":        ["b-@github"],
+    "group:home-user":    ["b-@github"],
+    "group:komodo-admin": ["b-@github"],
+    "group:prod":         ["b-@github"]
+  },
+  // Define the tags which can be applied to devices and by which users.
+  // "tagOwners": {
+  //  	"tag:example": ["autogroup:admin"],
+  // },
+  "tagOwners": {
+    "tag:dev":                  ["group:devel"],
+    "tag:dn42":                 [],
+    "tag:dns-server":           ["group:prod"],
+    "tag:dns-update":           ["group:devel"],
+    "tag:docker":               ["group:devel"],
+    "tag:external":             [],
+    "tag:free":                 ["group:devel"],
+    "tag:github-runner":        ["group:devel"],
+    "tag:home":                 [],
+    "tag:hypervisor":           ["group:devel"],
+    "tag:ingress":              ["group:prod"],
+    "tag:internet":             ["autogroup:member"],
+    "tag:komodo-core":          ["group:komodo-admin"],
+    "tag:komodo-periphery":     ["group:komodo-admin", "group:devel"],
+    "tag:periphery":            ["group:komodo-admin", "group:devel"],
+    "tag:op-connect":           ["group:devel"],
+    "tag:prod":                 ["group:prod"],
+    "tag:proxmox":              [],
+    "tag:router":               [],
+    "tag:traefik":              ["group:prod"],
+    "tag:traefik-redis":        ["group:prod"],
+    "tag:traefik-kop":          ["group:prod"],
+    "tag:tsdproxy":             ["group:devel"],
+    "tag:vyos":                 ["group:devel"]
+  },
+  "grants": [
+    {
+      "src": ["group:admin"],
+      "dst": ["*"],
+      "ip":  ["5252"],
+      "app": {
+        "tailscale.com/cap/webui": [
+          {
+            // Grants user@example.com edit access to "tag:dev" devices' web interfaces.
+            //"canEdit": ["ssh", "subnets"]
+            "canEdit": ["*"],
+          },
+        ],
+      },
+    },
+    { // grant access to komodo core ui port 9120 and 443 to komodo-admin
+      "src": ["group:komodo-admin"],
+      "dst": ["tag:komodo-core"],
+      "ip": ["9120", "443"],
+    },
+    { // grant access to komodo periphery port 8120 and 443 to komodo core
+      "src": ["tag:komodo-core"],
+      "dst": ["tag:periphery"],
+      "ip": ["9120", "443"],
+    },
+    { // grant access from traefik to traefik-redis
+      "src": ["tag:traefik"],
+      "dst": ["tag:traefik-redis"],
+    },
+    { // grant access from traefik to traefik-kop
+      "src": ["tag:traefik"],
+      "dst": ["tag:traefik-kop"],
+    },
+    { // grant access from traefik-kop to traefik-kop
+      "src": ["tag:traefik-kop"],
+      "dst": ["tag:traefik-kop"],
+    }
+  ],
+  "autoApprovers": {
+    "routes": {
+      "172.20.0.0/14": ["tag:dn42"],
+    },
+    "exitNode": [
+      "tag:router",
+      "tag:github-runner",
+      "autogroup:admin",
+      "tag:external",
+    ],
+  },
 
-	// Define access control lists for users, groups, autogroups, tags,
-	// Tailscale IP addresses, and subnet ranges.
-	"acls": [
-		// Allow all connections.
-		// Comment this section out if you want to define specific restrictions.
-		//{ "action": "accept", "src": ["*"], "dst": ["*:*"] },
+  // Define access control lists for users, groups, autogroups, tags,
+  // Tailscale IP addresses, and subnet ranges.
+  "acls": [
+    // Allow all connections.
+    // Comment this section out if you want to define specific restrictions.
+    //{ "action": "accept", "src": ["*"], "dst": ["*:*"] },
 
-		{
-			"action": "accept",
-			"src":    ["*"],
-			"dst":    ["tag:ingress:443"],
-		},
+    {
+      "action": "accept",
+      "src":    ["*"],
+      "dst":    ["tag:ingress:443"],
+    },
 
-		{
-			"action": "accept",
-			"src":    ["*"],
-			"dst":    ["tag:periphery:8120"],
-		},
+    {
+      "action": "accept",
+      "src":    ["*"],
+      "dst":    ["tag:periphery:8120"],
+    },
 
-		{
-			"action": "accept",
-			"src":    ["*"],
-			"dst":    ["tag:dns-server:53"],
-		},
+    {
+      "action": "accept",
+      "src":    ["*"],
+      "dst":    ["tag:dns-server:53"],
+    },
 
-		{
-			"action": "accept",
-			"src":    ["group:devel", "group:prod"],
-			"dst":    ["tag:dns-server:53443"],
-		},
+    {
+      "action": "accept",
+      "src":    ["group:devel", "group:prod"],
+      "dst":    ["tag:dns-server:53443"],
+    },
 
-		{
-			"action": "accept",
-			"src": [
-				"group:home-user",
-				"group:prod",
-				"tag:prod",
-				"autogroup:member",
-				"tag:hypervisor",
-				"tag:router",
-				"tag:internet",
-			],
-			"dst": ["*:*"],
-		},
-		{
-			"action": "accept",
-			"src":    ["tag:internet"],
-			"dst":    ["autogroup:internet:*"],
-		},
-		{
-			"action": "accept",
-			"src":    ["autogroup:member"],
-			"dst":    ["autogroup:internet:*"],
-		},
-	],
+    {
+      "action": "accept",
+      "src": [
+        "group:home-user",
+        "group:prod",
+        "tag:prod",
+        "autogroup:member",
+        "tag:hypervisor",
+        "tag:router",
+        "tag:internet",
+      ],
+      "dst": ["*:*"],
+    },
+    {
+      "action": "accept",
+      "src":    ["tag:internet"],
+      "dst":    ["autogroup:internet:*"],
+    },
+    {
+      "action": "accept",
+      "src":    ["autogroup:member"],
+      "dst":    ["autogroup:internet:*"],
+    },
+  ],
 
-	"nodeAttrs": [
-		{
-			"target": [
-				"group:can-funnel",
-				"tag:ingress",
-				"tag:dns-server",
-				"tag:router",
-			],
-			"attr": ["funnel"],
-		},
-		{
-			"target": [
-				"tag:komodo-core",
-			],
-			"attr": ["funnel"],
-		},
-	],
+  "nodeAttrs": [
+    {
+      "target": [
+        "group:can-funnel",
+        "tag:ingress",
+        "tag:dns-server",
+        "tag:router",
+      ],
+      "attr": ["funnel"],
+    },
+    {
+      "target": [
+        "tag:komodo-core",
+      ],
+      "attr": ["funnel"],
+    },
+  ],
 
-	// Declare convenient hostname aliases to use in place of IP addresses.
-	"hosts": {
-		"dn42-ipv4":    "172.20.0.0/14",
-		"dn42-ipv6":    "fd00::/8", // dn42 uses the whole fd00::/8
-		"my-dn42":      "172.23.217.64/26",
-		"my-dn42-home": "172.23.217.64/27",
-		"my-dn42-mia":  "172.23.217.96/27",
-		"vlan30":       "192.168.30.0/24",
-		"vlan31":       "10.31.0.0/16",
-		"vlan12":       "192.168.12.0/24",
-		"ts-dns":       "100.100.100.100",
-	},
+  // Declare convenient hostname aliases to use in place of IP addresses.
+  "hosts": {
+    "dn42-ipv4":    "172.20.0.0/14",
+    "dn42-ipv6":    "fd00::/8", // dn42 uses the whole fd00::/8
+    "my-dn42":      "172.23.217.64/26",
+    "my-dn42-home": "172.23.217.64/27",
+    "my-dn42-mia":  "172.23.217.96/27",
+    "vlan30":       "192.168.30.0/24",
+    "vlan31":       "10.31.0.0/16",
+    "vlan12":       "192.168.12.0/24",
+    "ts-dns":       "100.100.100.100",
+  },
 
-	// Define users and devices that can use Tailscale SSH.
-	"ssh": [
-		{
-			// ACCEPT group:devel => tag:dev
-			"action": "accept",
-			"src":    ["group:devel"],
-			"dst": [
-				"tag:periphery",
-				"tag:dev",
-				"tag:docker",
-				"tag:github-runner",
-				"tag:hypervisor",
-				"tag:router",
-			],
-			"users": ["autogroup:nonroot", "root"],
-		},
-		// Allow all users to SSH into their own devices in check mode.
-		// Comment this section out if you want to define specific restrictions.
-		{
-			"action": "check",
-			"src":    ["autogroup:member"],
-			"dst":    ["autogroup:self"],
-			"users":  ["autogroup:nonroot", "root"],
-		},
-		{
-			"action": "check",
-			"src":    ["group:admin"],
-			"dst": [
-				"tag:dev",
-				"tag:dns-server",
-				"tag:dns-update",
-				"tag:docker",
-				"tag:free",
-				"tag:github-runner",
-				"tag:home",
-				"tag:hypervisor",
-				"tag:prod",
-				"tag:proxmox",
-				"tag:ingress",
-				"tag:router",
-				"tag:vyos",
-				"tag:internet",
-			],
-			"users": ["autogroup:nonroot", "root"],
-		},
-	],
+  // Define users and devices that can use Tailscale SSH.
+  "ssh": [
+    {
+      // ACCEPT group:devel => tag:dev
+      "action": "accept",
+      "src":    ["group:devel"],
+      "dst": [
+        "tag:periphery",
+        "tag:dev",
+        "tag:docker",
+        "tag:github-runner",
+        "tag:hypervisor",
+        "tag:router",
+      ],
+      "users": ["autogroup:nonroot", "root"],
+    },
+    // Allow all users to SSH into their own devices in check mode.
+    // Comment this section out if you want to define specific restrictions.
+    {
+      "action": "check",
+      "src":    ["autogroup:member"],
+      "dst":    ["autogroup:self"],
+      "users":  ["autogroup:nonroot", "root"],
+    },
+    {
+      "action": "check",
+      "src":    ["group:admin"],
+      "dst": [
+        "tag:dev",
+        "tag:dns-server",
+        "tag:dns-update",
+        "tag:docker",
+        "tag:free",
+        "tag:github-runner",
+        "tag:home",
+        "tag:hypervisor",
+        "tag:prod",
+        "tag:proxmox",
+        "tag:ingress",
+        "tag:router",
+        "tag:vyos",
+        "tag:internet",
+      ],
+      "users": ["autogroup:nonroot", "root"],
+    },
+  ],
 
-	// Test access rules every time they're saved.
-	// "tests": [
-	//  	{
-	//  		"src": "alice@example.com",
-	//  		"accept": ["tag:example"],
-	//  		"deny": ["100.101.102.103:443"],
-	//  	},
-	// ],
-	"tests": [
-		{
-			"src": "b-@github",
-			"accept": [
-				"tag:dev:80",
-				"tag:prod:80",
-				"tag:ingress:443",
-				"tag:hypervisor:8006",
-				"tag:router:22",
-			],
-		},
-		{"src": "group:github-runner", "accept": ["tag:dns-server:53"]},
-		{"src": "group:external", "deny": ["tag:hypervisor:8006"]},
-	],
+  // Test access rules every time they're saved.
+  // "tests": [
+  //  	{
+  //  		"src": "alice@example.com",
+  //  		"accept": ["tag:example"],
+  //  		"deny": ["100.101.102.103:443"],
+  //  	},
+  // ],
+  "tests": [
+    {
+      "src": "b-@github",
+      "accept": [
+        "tag:dev:80",
+        "tag:prod:80",
+        "tag:ingress:443",
+        "tag:hypervisor:8006",
+        "tag:router:22",
+      ],
+    },
+    {"src": "group:github-runner", "accept": ["tag:dns-server:53"]},
+    {"src": "group:external", "deny": ["tag:hypervisor:8006"]},
+  ],
 }
