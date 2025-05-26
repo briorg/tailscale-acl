@@ -65,8 +65,12 @@
     },
     { // grant access to komodo periphery port 8120 and 443 to komodo core
       "src": ["tag:komodo-core"],
-      "dst": ["tag:periphery"],
+      "dst": ["tag:periphery", "komodo-periphery"],
       "ip": ["9120", "443"],
+    },
+    { // grant komodo to komodo
+      "src": ["tag:komodo-core", "tag:komodo-periphery", "tag:periphery"],
+      "dst": ["tag:komodo-core", "tag:komodo-periphery", "tag:periphery"],
     },
     { // grant access from traefik to traefik-redis
       "src": ["tag:traefik"],
