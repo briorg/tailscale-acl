@@ -71,18 +71,22 @@
     { // grant komodo to komodo
       "src": ["tag:komodo-core", "tag:komodo-periphery", "tag:periphery"],
       "dst": ["tag:komodo-core", "tag:komodo-periphery", "tag:periphery"],
+      "ip": ["*"]
     },
     { // grant access from traefik to traefik-redis
       "src": ["tag:traefik"],
       "dst": ["tag:traefik-redis"],
+      "ip": ["*"]
     },
     { // grant access from traefik to traefik-kop
       "src": ["tag:traefik"],
       "dst": ["tag:traefik-kop"],
+      "ip": ["*"]
     },
     { // grant access from traefik-kop to traefik-kop
       "src": ["tag:traefik-kop"],
       "dst": ["tag:traefik-kop"],
+      "ip": ["*"]
     }
   ],
   "autoApprovers": {
