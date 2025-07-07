@@ -6,12 +6,12 @@
 	//   "group:example": ["alice@example.com", "bob@example.com"],
 	// },
 	"groups": {
-		"group:admin":        ["b-@github"],
-		"group:can-funnel":   ["b-@github"],
-		"group:devel":        ["b-@github"],
-		"group:home-user":    ["b-@github"],
-		"group:komodo-admin": ["b-@github"],
-		"group:prod":         ["b-@github"],
+		"group:admin":        ["b-@github", "bri1p@passkey"],
+		"group:can-funnel":   ["b-@github", "bri1p@passkey"],
+		"group:devel":        ["b-@github", "bri1p@passkey"],
+		"group:home-user":    ["b-@github", "bri1p@passkey"],
+		"group:komodo-admin": ["b-@github", "bri1p@passkey"],
+		"group:prod":         ["b-@github", "bri1p@passkey"],
 	},
 
 	// Define the tags which can be applied to devices and by which users.
