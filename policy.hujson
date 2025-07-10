@@ -46,6 +46,13 @@
 	},
 
 	"grants": [
+    	// Allow all connections.
+    	// TODO: Comment this section out if you want to define specific restrictions.
+    	{
+    		"src": ["*"],
+    		"dst": ["*"],
+    		"ip":  ["*"],
+    	},
 		{
 			"src": ["group:admin"],
 			"dst": ["*"],
@@ -54,7 +61,7 @@
 			"app": {
 				"tailscale.com/cap/webui": [
 					{
-						// Grants user@example.com edit access to "tag:dev" devices' web interfaces.
+						// Grants group:admin edit access to devices' web interfaces.
 						//"canEdit": ["ssh", "subnets"]
 						"canEdit": ["*"],
 					},
@@ -62,7 +69,7 @@
 			},
 		},
 		{
-			// grant access to komodo core ui port 9120 and 443 to komodo-admin
+			// grant group:komodo-admin access to komodo core ui port 9120 and 443 to komodo-admin
 			"src": ["group:komodo-admin"],
 
 			"dst": ["tag:komodo-core"],
@@ -101,13 +108,6 @@
 			"src": ["tag:traefik-kop"],
 
 			"dst": ["tag:traefik-kop"],
-			"ip":  ["*"],
-		},
-		// Allow all connections.
-		// Comment this section out if you want to define specific restrictions.
-		{
-			"src": ["*"],
-			"dst": ["*"],
 			"ip":  ["*"],
 		},
 		{
@@ -202,9 +202,7 @@
 		{
 			// ACCEPT group:devel => tag:dev
 			"action": "accept",
-
 			"src": ["group:devel"],
-
 			"dst": [
 				"tag:periphery",
 				"tag:dev",
@@ -213,7 +211,6 @@
 				"tag:hypervisor",
 				"tag:router",
 			],
-
 			"users": ["autogroup:nonroot", "root"],
 		},
 		// Allow all users to SSH into their own devices in check mode.
@@ -247,6 +244,15 @@
 
 			"users": ["autogroup:nonroot", "root"],
 		},
+		{
+			// ACCEPT tag:github-runner => tag:hypervisor
+			"action": "accept",
+			"src": ["tag:github-runner"],
+			"dst": [
+				"tag:hypervisor",
+			],
+			"users": ["autogroup:nonroot", "root"],
+		},
 	],
 
 	// Test access rules every time they're saved.
@@ -270,8 +276,13 @@
 			],
 		},
 		{
-			"src":    "group:github-runner",
-			"accept": ["tag:dns-server:53"],
+			"src":    "tag:github-runner",
+			"accept": [
+			"tag:dns-server:53",
+			"tag:hypervisor:8006",
+			"tag:hypervisor:443",
+			"tag:hypervisor:22",
+			],
 		},
 
 		//{"src": "group:external", "deny": ["tag:hypervisor:8006"]},
