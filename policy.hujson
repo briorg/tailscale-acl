@@ -240,7 +240,7 @@
 				"tag:router",
 				"tag:vyos",
 				"tag:internet",
-				"autogroup:member",
+				"autogroup:danger-all",
 			],
 
 			"users": ["autogroup:nonroot", "root"],
