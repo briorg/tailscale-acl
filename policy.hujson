@@ -222,7 +222,7 @@
 			"users":  ["autogroup:nonroot", "root"],
 		},
 		{
-			"action": "check",
+			"action": "accept",
 			"src":    ["group:admin"],
 
 			"dst": [
