@@ -230,7 +230,7 @@
         "tag:dns-server",
         "tag:dns-update",
         "tag:docker",
-        "tag:free",
+        "tag:terraform",
         "tag:github-runner",
         "tag:home",
         "tag:hypervisor",
