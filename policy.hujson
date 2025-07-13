@@ -25,7 +25,7 @@
 		"tag:dns-update":       ["group:devel"],
 		"tag:docker":           ["group:devel"],
 		"tag:external":         [],
-		"tag:free":             ["group:devel"],
+		"tag:terraform":        ["group:devel"],
 		"tag:github-runner":    ["group:devel"],
 		"tag:home":             [],
 		"tag:hypervisor":       ["group:devel"],
@@ -247,7 +247,10 @@
 		{
 			// ACCEPT tag:github-runner => tag:hypervisor
 			"action": "accept",
-			"src": ["tag:github-runner"],
+			"src": [
+				"tag:github-runner",
+				"tag:terraform"
+			],
 			"dst": [
 				"tag:hypervisor",
 			],
@@ -263,6 +266,22 @@
 	//       "deny": ["100.101.102.103:443"],
 	//   },
 	// ],
+	"sshTests": [
+	  {
+	    "src": "tag:terraform",
+	    "dst": ["pve1.shark-perch.ts.net"],
+	    "accept": ["root"],
+	    // "check": ["admin"],
+	    // "deny": ["root"],
+	  },
+	  {
+	    "src": "tag:github-runner",
+	    "dst": ["pve1.shark-perch.ts.net"],
+	    "accept": ["root"],
+	    // "check": ["admin"],
+	    // "deny": ["root"],
+	  },
+	],
 	"tests": [
 		{
 			"src": "b-@github",
