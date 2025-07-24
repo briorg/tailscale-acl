@@ -157,7 +157,11 @@
   ],
 
   "autoApprovers": {
-    "routes": { "172.20.0.0/14": ["tag:dn42"] },
+    "routes": {
+      "172.20.0.0/14": ["tag:dn42"],
+      //"192.168.1.0": ["tag:home"],
+      "fd7a:115c:a1e0:b1a:0:1:c0a8:100/120" : ["tag:home"],
+    },
 
     "exitNode": [
       "tag:router",
