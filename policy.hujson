@@ -224,7 +224,6 @@
 				"tag:prod",
 				"tag:web-ingress",
 				"tag:router",
-				"tag:internet",
 			],
 
 			"users": ["autogroup:nonroot", "root"],
