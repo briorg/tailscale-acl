@@ -34,7 +34,7 @@
 	// },
 	"tagOwners": {
 		"tag:web-backend":      ["autogroup:admin"],
-		"tag:web-ingress":          ["autogroup:admin"],
+		"tag:web-ingress":      ["autogroup:admin"],
 		"tag:dns-server":       [],
 		"tag:docker":           ["group:komodo-admin"],
 		"tag:terraform":        [],
