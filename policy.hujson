@@ -168,7 +168,6 @@
 			"tag:router",
 			"tag:github-runner",
 			"autogroup:admin",
-			"tag:external",
 		],
 	},
 
