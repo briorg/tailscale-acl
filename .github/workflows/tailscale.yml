@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Format files
-        run: docker run --rm -v.:/work -w/work "docker.io/golang:latest" go run github.com/tailscale/hujson/cmd/hujsonfmt@latest -w ./**/*.hujson
+        run: bash -c 'docker run --rm -v.:/work -w/work docker.io/golang:latest go run github.com/tailscale/hujson/cmd/hujsonfmt@latest -w ./**/*.hujson'
       - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
         with:
           # The message for the commit.
