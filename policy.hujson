@@ -120,7 +120,7 @@
 		},
 		{
 			"src": ["*"],
-			"dst": ["tag:ingress"],
+			"dst": ["tag:web-ingress"],
 			"ip":  ["443"],
 		},
 		{
@@ -170,7 +170,7 @@
 		{
 			"target": [
 				"group:can-funnel",
-				"tag:ingress",
+				"tag:web-ingress",
 				"tag:dns-server",
 				"tag:router",
 			],
@@ -221,7 +221,7 @@
 				"tag:hypervisor",
 				"tag:prod",
 				"tag:proxmox",
-				"tag:ingress",
+				"tag:web-ingress",
 				"tag:router",
 				"tag:vyos",
 				"tag:internet",
@@ -269,7 +269,7 @@
 			"accept": [
 				"tag:dev:80",
 				"tag:prod:80",
-				"tag:ingress:443",
+				"tag:web-ingress:443",
 				"tag:hypervisor:8006",
 				"tag:router:22",
 			],
