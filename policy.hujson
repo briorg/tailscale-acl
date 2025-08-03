@@ -87,14 +87,14 @@
 			// grant access to komodo periphery port 8120 and 443 to komodo core
 			"src": ["tag:komodo-core"],
 
-			"dst": ["tag:periphery", "tag:komodo-periphery"],
-			"ip":  ["9120", "443"],
+			"dst": ["tag:komodo-periphery"],
+			"ip":  ["8120", "9120", "443"],
 		},
 		{
 			// grant komodo to komodo
-			"src": ["tag:komodo-core", "tag:komodo-periphery", "tag:periphery"],
+			"src": ["tag:komodo-core", "tag:komodo-periphery", ],
 
-			"dst": ["tag:komodo-core", "tag:komodo-periphery", "tag:periphery"],
+			"dst": ["tag:komodo-core", "tag:komodo-periphery", ],
 			"ip":  ["*"],
 		},
 		{
@@ -122,11 +122,6 @@
 			"src": ["*"],
 			"dst": ["tag:ingress"],
 			"ip":  ["443"],
-		},
-		{
-			"src": ["*"],
-			"dst": ["tag:periphery"],
-			"ip":  ["8120"],
 		},
 		{
 			"src": ["*"],
