@@ -92,9 +92,9 @@
 		},
 		{
 			// grant komodo to komodo
-			"src": ["tag:komodo-core", "tag:komodo-periphery", ],
+			"src": ["tag:komodo-core", "tag:komodo-periphery"],
 
-			"dst": ["tag:komodo-core", "tag:komodo-periphery", ],
+			"dst": ["tag:komodo-core", "tag:komodo-periphery"],
 			"ip":  ["*"],
 		},
 		{
