@@ -44,11 +44,11 @@
 		"tag:komodo-core":      ["group:komodo-admin"],
 		"tag:komodo-periphery": ["group:komodo-admin"],
 		"tag:op-connect":       ["group:devel"],
-		"tag:prod":             ["group:prod"],
+		"tag:prod":             [],
 		"tag:router":           [],
-		"tag:traefik":          ["group:prod"],
-		"tag:traefik-redis":    ["group:prod"],
-		"tag:traefik-kop":      ["group:prod"],
+		"tag:traefik":          [],
+		"tag:traefik-redis":    [],
+		"tag:traefik-kop":      [],
 		"tag:tsdproxy":         ["group:devel"],
 	},
 
@@ -133,14 +133,12 @@
 			"ip":  ["53"],
 		},
 		{
-			"src": ["group:devel", "group:prod"],
+			"src": ["group:devel"],
 			"dst": ["tag:dns-server"],
 			"ip":  ["53443"],
 		},
 		{
 			"src": [
-				"group:home-user",
-				"group:prod",
 				"tag:prod",
 				"autogroup:member",
 				"tag:hypervisor",
@@ -210,20 +208,6 @@
 
 	// Define users and devices that can use Tailscale SSH.
 	"ssh": [
-		{
-			// ACCEPT group:devel => tag:dev
-			"action": "accept",
-			"src":    ["group:devel"],
-			"dst": [
-				"tag:periphery",
-				"tag:dev",
-				"tag:docker",
-				"tag:github-runner",
-				"tag:hypervisor",
-				"tag:router",
-			],
-			"users": ["autogroup:nonroot", "root"],
-		},
 		// Allow all users to SSH into their own devices in check mode.
 		// Comment this section out if you want to define specific restrictions.
 		{
