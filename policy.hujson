@@ -14,6 +14,10 @@
 			"b-@github",
 			"bri1p@passkey",
 		],
+		"group:can-exit": [
+			"b-@github",
+			"bri1p@passkey",
+		],
 		"group:komodo-admin": [
 			"b-@github",
 			"bri1p@passkey",
@@ -33,6 +37,8 @@
 	//   "tag:example": ["autogroup:admin"],
 	// },
 	"tagOwners": {
+		"tag:can-exit":         ["group:can-exit"],
+		"tag:can-funnel":       ["group:can-funnel"],
 		"tag:web-backend":      ["autogroup:admin"],
 		"tag:web-ingress":      ["autogroup:admin"],
 		"tag:dns-server":       [],
@@ -134,14 +140,13 @@
 				"autogroup:member",
 				"tag:hypervisor",
 				"tag:router",
-				"tag:internet",
 			],
 
 			"dst": ["*"],
 			"ip":  ["*"],
 		},
 		{
-			"src": ["tag:internet"],
+			"src": ["tag:can-exit"],
 			"dst": ["autogroup:internet"],
 			"ip":  ["*"],
 		},
