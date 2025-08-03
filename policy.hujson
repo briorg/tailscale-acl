@@ -36,7 +36,7 @@
 		"tag:web-backend":      ["autogroup:admin"],
 		"tag:web-ingress":      ["autogroup:admin"],
 		"tag:dns-server":       [],
-		"tag:dn42-router": [],
+		"tag:dn42-router":      [],
 		"tag:docker":           ["group:komodo-admin"],
 		"tag:terraform":        [],
 		"tag:github-runner":    [],
