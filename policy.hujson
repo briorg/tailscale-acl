@@ -217,7 +217,6 @@
 
 			"dst": [
 				"tag:dns-server",
-				"tag:dns-update",
 				"tag:docker",
 				"tag:terraform",
 				"tag:github-runner",
