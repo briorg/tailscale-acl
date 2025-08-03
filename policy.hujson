@@ -43,13 +43,13 @@
 		"tag:hypervisor":       ["autogroup:admin"],
 		"tag:komodo-core":      ["group:komodo-admin"],
 		"tag:komodo-periphery": ["group:komodo-admin"],
-		"tag:op-connect":       ["group:devel"],
+		"tag:op-connect":       [],
 		"tag:prod":             [],
 		"tag:router":           [],
 		"tag:traefik":          [],
 		"tag:traefik-redis":    [],
 		"tag:traefik-kop":      [],
-		"tag:tsdproxy":         ["group:devel"],
+		"tag:tsdproxy":         [],
 	},
 
 	"grants": [
@@ -131,11 +131,6 @@
 			"src": ["*"],
 			"dst": ["tag:dns-server"],
 			"ip":  ["53"],
-		},
-		{
-			"src": ["group:devel"],
-			"dst": ["tag:dns-server"],
-			"ip":  ["53443"],
 		},
 		{
 			"src": [
