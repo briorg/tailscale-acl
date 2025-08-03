@@ -220,13 +220,10 @@
 				"tag:docker",
 				"tag:terraform",
 				"tag:github-runner",
-				"tag:home",
 				"tag:hypervisor",
 				"tag:prod",
-				"tag:proxmox",
 				"tag:web-ingress",
 				"tag:router",
-				"tag:vyos",
 				"tag:internet",
 			],
 
