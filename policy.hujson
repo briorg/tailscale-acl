@@ -39,6 +39,7 @@
 	"tagOwners": {
 		"tag:can-exit":         [],
 		"tag:can-funnel":       [],
+		"tag:exit-node":        [],
 		"tag:web-backend":      [],
 		"tag:web-ingress":      [],
 		"tag:dns-server":       [],
@@ -166,6 +167,7 @@
 
 		"exitNode": [
 			"tag:router",
+			"tag:exit-node",
 			"tag:github-runner",
 			"autogroup:admin",
 		],
