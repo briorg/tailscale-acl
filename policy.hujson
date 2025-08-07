@@ -6,30 +6,12 @@
 	//   "group:example": ["alice@example.com", "bob@example.com"],
 	// },
 	"groups": {
-		"group:admin": [
-			"b-@github",
-			"bri1p@passkey",
-		],
-		"group:can-funnel": [
-			"b-@github",
-			"bri1p@passkey",
-		],
-		"group:can-exit": [
-			"b-@github",
-			"bri1p@passkey",
-		],
-		"group:komodo-admin": [
-			"b-@github",
-			"bri1p@passkey",
-		],
-		"group:arr-admin": [
-			"b-@github",
-			"bri1p@passkey",
-		],
-		"group:arr-user": [
-			"b-@github",
-			"bri1p@passkey",
-		],
+		"group:admin":        ["b-@github", "bri1p@passkey"],
+		"group:can-funnel":   ["b-@github", "bri1p@passkey"],
+		"group:can-exit":     ["b-@github", "bri1p@passkey"],
+		"group:komodo-admin": ["b-@github", "bri1p@passkey"],
+		"group:arr-admin":    ["b-@github", "bri1p@passkey"],
+		"group:arr-user":     ["b-@github", "bri1p@passkey"],
 	},
 
 	// Define the tags which can be applied to devices and by which users.
@@ -58,6 +40,9 @@
 		"tag:traefik-redis":    [],
 		"tag:traefik-kop":      [],
 		"tag:tsdproxy":         [],
+
+		// tailscale ssh recorder
+		"tag:ssh-recorder": [],
 	},
 
 	"grants": [
@@ -68,60 +53,47 @@
 			"dst": ["*"],
 			"ip":  ["*"],
 		},
+		// Grants group:admin edit access to devices' web interfaces.
+		//"canEdit": ["ssh", "subnets"]
 		{
 			"src": ["group:admin"],
 			"dst": ["*"],
 			"ip":  ["5252"],
-
-			"app": {
-				"tailscale.com/cap/webui": [
-					{
-						// Grants group:admin edit access to devices' web interfaces.
-						//"canEdit": ["ssh", "subnets"]
-						"canEdit": ["*"],
-					},
-				],
-			},
+			"app": {"tailscale.com/cap/webui": [{"canEdit": ["*"]}]},
 		},
+		// grant group:komodo-admin access to komodo core ui port 9120 and 443 to komodo-admin
 		{
-			// grant group:komodo-admin access to komodo core ui port 9120 and 443 to komodo-admin
 			"src": ["group:komodo-admin"],
-
 			"dst": ["tag:komodo-core"],
 			"ip":  ["9120", "443"],
 		},
+		// grant access to komodo periphery port 8120 and 443 to komodo core
 		{
-			// grant access to komodo periphery port 8120 and 443 to komodo core
 			"src": ["tag:komodo-core"],
-
 			"dst": ["tag:komodo-periphery"],
 			"ip":  ["8120", "9120", "443"],
 		},
+		// grant komodo to komodo
 		{
-			// grant komodo to komodo
 			"src": ["tag:komodo-core", "tag:komodo-periphery"],
-
 			"dst": ["tag:komodo-core", "tag:komodo-periphery"],
 			"ip":  ["*"],
 		},
+		// grant access from traefik to traefik-redis
 		{
-			// grant access from traefik to traefik-redis
 			"src": ["tag:traefik"],
-
 			"dst": ["tag:traefik-redis"],
 			"ip":  ["*"],
 		},
+		// grant access from traefik to traefik-kop
 		{
-			// grant access from traefik to traefik-kop
 			"src": ["tag:traefik"],
-
 			"dst": ["tag:traefik-kop"],
 			"ip":  ["*"],
 		},
+		// grant access from traefik-kop to traefik-kop
 		{
-			// grant access from traefik-kop to traefik-kop
 			"src": ["tag:traefik-kop"],
-
 			"dst": ["tag:traefik-kop"],
 			"ip":  ["*"],
 		},
@@ -161,6 +133,7 @@
 	"autoApprovers": {
 		"routes": {
 			"172.20.0.0/14": ["tag:dn42-router"],
+
 			//"192.168.1.0": ["tag:home"],
 			"fd7a:115c:a1e0:b1a:0:1:c0a8:100/120": ["tag:home"],
 		},
@@ -230,12 +203,20 @@
 
 			"users": ["autogroup:nonroot", "root"],
 		},
+		// ACCEPT tag:github-runner => tag:hypervisor
 		{
-			// ACCEPT tag:github-runner => tag:hypervisor
 			"action": "accept",
 			"src":    ["tag:github-runner", "tag:terraform"],
 			"dst":    ["tag:hypervisor"],
 			"users":  ["autogroup:nonroot", "root"],
+		},
+		// allow access from admin to tagged devices
+		{
+			"src":      ["autogroup:admin"],
+			"dst":      ["autogroup:tagged"],
+			"users":    ["root", "autogroup:nonroot"],
+			"action":   "accept",
+			"recorder": ["tag:ssh-recorder"],
 		},
 	],
 
@@ -252,6 +233,7 @@
 			"src":    "tag:terraform",
 			"dst":    ["tag:hypervisor"],
 			"accept": ["root"],
+
 			// "check": ["admin"],
 			// "deny": ["root"],
 		},
@@ -259,10 +241,12 @@
 			"src":    "tag:github-runner",
 			"dst":    ["tag:hypervisor"],
 			"accept": ["root"],
+
 			// "check": ["admin"],
 			// "deny": ["root"],
 		},
 	],
+
 	"tests": [
 		{
 			"src": "b-@github",
@@ -276,6 +260,7 @@
 		},
 		{
 			"src": "tag:github-runner",
+
 			"accept": [
 				"tag:dns-server:53",
 				"tag:hypervisor:8006",
