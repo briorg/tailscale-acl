@@ -148,9 +148,9 @@
 	],
 
 	"autoApprovers": {
-        "services": {
-            "svc:foo": ["autogroup:member", "autogroup:tagged"]
-        },
+		"services": {
+			"svc:foo": ["autogroup:member", "autogroup:tagged"],
+		},
 		"routes": {
 			"172.20.0.0/14": ["tag:dn42-router"],
 
