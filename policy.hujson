@@ -177,6 +177,7 @@
 		{
 			"target": [
 				"group:can-funnel",
+				"tag:can-funnel",
 				"tag:web-ingress",
 				"tag:dns-server",
 				"tag:router",
