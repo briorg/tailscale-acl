@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  merge_group:
 
 jobs:
   acls:
@@ -28,7 +29,7 @@ jobs:
           default_author: 'github_actions'
 
       - name: Deploy ACL
-        if: github.event_name == 'push'
+        if: (github.event_name == 'push' || github.event_name == 'merge_group')
         id: deploy-acl
         uses: tailscale/gitops-acl-action@v1
         with:
