@@ -70,6 +70,43 @@
 			"dst": ["*"],
 			"ip":  ["*"],
 		},
+
+        // tsidp admin
+        {
+          "src": ["autogroup:admin"],
+          "dst": ["*"],
+          "app": {
+            "tailscale.com/cap/tsidp": [
+              {
+                "includeInUserInfo": true,
+                "extraClaims": {
+                  "groups": ["admin"],
+                  "entitlements": ["admin-stuff"]
+                }
+              }
+            ]
+          }
+        },
+
+        // tsidp everyone else
+        {
+          "src": ["autogroup:member"],
+          "dst": ["*"],
+          "app": {
+            "tailscale.com/cap/tsidp": [
+              {
+                "includeInUserInfo": true,
+                "extraClaims": {
+                  "groups": ["member"],
+                  "entitlements": ["foo"]
+                }
+              }
+            ]
+          }
+        },
+    
+
+
 		// Grants autogroup:admin edit access to devices' web interfaces.
 		//"canEdit": ["ssh", "subnets"]
 		{
