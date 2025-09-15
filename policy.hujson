@@ -70,15 +70,16 @@
 			"dst": ["*"],
 			"ip":  ["*"],
 		},
-
 		// tsidp admin
 		{
 			"src": ["autogroup:admin"],
 			"dst": ["*"],
+
 			"app": {
 				"tailscale.com/cap/tsidp": [
 					{
 						"includeInUserInfo": true,
+
 						"extraClaims": {
 							"groups":       ["admin"],
 							"entitlements": ["admin-stuff"],
@@ -87,24 +88,20 @@
 				],
 			},
 		},
-
 		// tsidp everyone else
 		{
 			"src": ["autogroup:member"],
 			"dst": ["*"],
+
 			"app": {
 				"tailscale.com/cap/tsidp": [
 					{
+						"extraClaims":       {"groups": ["member"]},
 						"includeInUserInfo": true,
-						"extraClaims": {
-							"groups":       ["member"],
-							"entitlements": ["foo"],
-						},
 					},
 				],
 			},
 		},
-
 		// Grants autogroup:admin edit access to devices' web interfaces.
 		//"canEdit": ["ssh", "subnets"]
 		{
@@ -183,9 +180,8 @@
 	],
 
 	"autoApprovers": {
-		"services": {
-			"svc:foo": ["tag:home", "autogroup:member", "autogroup:tagged"],
-		},
+		"services": {"svc:foo": ["tag:home", "autogroup:member", "autogroup:tagged"]},
+
 		"routes": {
 			"172.20.0.0/14": ["tag:dn42-router"],
 
@@ -196,6 +192,7 @@
 
 			// autoapprove all ipv4 subnet routes for tag:subnet-router
 			"0.0.0.0/0": ["tag:subnet-router"],
+
 			// autoapprove all ipv6 subnet routes for tag:subnet-router
 			"::/0": ["tag:subnet-router"],
 		},
