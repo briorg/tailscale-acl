@@ -25,4 +25,6 @@ get_policy() {
 }
 get_bearer
 get_policy > policy.hujson
+truncate -s -1 policy.hujson # remove the spurious extra newline
+
 git diff --exit-code 1>&2
