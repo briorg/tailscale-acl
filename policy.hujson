@@ -12,6 +12,14 @@
 		"group:komodo-admin": ["b-@github", "bri1p@passkey", "b@ibeep.com"],
 		"group:arr-admin":    ["b-@github", "bri1p@passkey", "b@ibeep.com"],
 		"group:arr-user":     ["b-@github", "bri1p@passkey", "b@ibeep.com"],
+
+		// Can access DN42
+		"group:dn42-user": [
+			"b-@github",
+			"bri1p@passkey",
+			"b@ibeep.com",
+			"b2@ibeep.com",
+		],
 	},
 
 	// Define the tags which can be applied to devices and by which users.
