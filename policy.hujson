@@ -93,19 +93,6 @@
 
 						// allow dynamic client registration
 						"allow_dcr": true,
-					},
-				],
-			},
-		},
-
-		// tsidp admin extraclaims
-		{
-			"src": ["autogroup:admin"],
-			"dst": ["*"],
-
-			"app": {
-				"tailscale.com/cap/tsidp": [
-					{
 						"extraClaims": {
 							"groups":       ["admin"],
 							"entitlements": ["admin-stuff"],
