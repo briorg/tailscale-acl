@@ -71,6 +71,9 @@
 
 		// tailscale ssh recorder
 		"tag:ssh-recorder": [],
+
+		"tag:taildrive-share":  [],
+		"tag:taildrive-access": [],
 	},
 
 	"grants": [
@@ -85,17 +88,17 @@
 		{
 			"src": ["autogroup:admin"],
 			"dst": ["*"],
+
 			"app": {
 				"tailscale.com/cap/tsidp": [
 					{
-						// allow access to UI
 						"allow_admin_ui": true,
+						"allow_dcr":      true,
 
-						// allow dynamic client registration
-						"allow_dcr": true,
 						"extraClaims": {
-							"groups":       ["admin"],
-							"entitlements": ["admin-stuff"],
+							"entitlements":      ["admin-stuff"],
+							"groups":            ["admin"],
+							"includeInUserInfo": true,
 						},
 					},
 				],
@@ -234,6 +237,18 @@
 			"target": ["tag:komodo-core"],
 			"attr":   ["funnel"],
 		},
+		{
+			"target": ["tag:taildrive-access"],
+			"attr":   ["drive:access"],
+		},
+		{
+			"target": ["tag:taildrive-share"],
+			"attr":   ["drive:share"],
+		},
+		{
+			"target": ["autogroup:admin"],
+			"attr":   ["drive:access", "drive:share"],
+		},
 	],
 
 	// Declare convenient hostname aliases to use in place of IP addresses.
@@ -290,6 +305,13 @@
 			"users":    ["root", "autogroup:nonroot"],
 			"action":   "accept",
 			"recorder": ["tag:ssh-recorder"],
+		},
+		// komodo-core to core
+		{
+			"src":    ["tag:komodo-core"],
+			"dst":    ["tag:komodo-core"],
+			"users":  ["autogroup:nonroot", "root"],
+			"action": "accept",
 		},
 	],
 
