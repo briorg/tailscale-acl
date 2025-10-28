@@ -72,8 +72,9 @@
 		// tailscale ssh recorder
 		"tag:ssh-recorder": [],
 
-		"tag:taildrive-share":  [],
-		"tag:taildrive-access": [],
+		"tag:taildrive-share":   [],
+		"tag:taildrive-access":  [],
+		"tag:tailgator-webhook": [],
 	},
 
 	"grants": [
