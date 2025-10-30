@@ -198,18 +198,18 @@
 
 	"autoApprovers": {
 		"services": {
-			"svc:pve": ["tag:hypervisor"],
+			"svc:pve":             ["tag:hypervisor"],
 			"svc:arr-filebrowser": ["tag:docker"],
-			"svc:plex": ["tag:docker"],
-			"svc:prowlarr": ["tag:docker"],
-			"svc:radarr": ["tag:docker"],
-			"svc:sonarr": ["tag:docker"],
-			"svc:lidarr": ["tag:docker"],
-			"svc:whoami": ["tag:docker"],
-			"svc:qbittorrent": ["tag:docker"],
-			"svc:tautulli": ["tag:docker"],
-			"svc:syncthing": ["tag:docker"],
-			"svc:jellyseerr": ["tag:docker"],
+			"svc:plex":            ["tag:docker"],
+			"svc:prowlarr":        ["tag:docker"],
+			"svc:radarr":          ["tag:docker"],
+			"svc:sonarr":          ["tag:docker"],
+			"svc:lidarr":          ["tag:docker"],
+			"svc:whoami":          ["tag:docker"],
+			"svc:qbittorrent":     ["tag:docker"],
+			"svc:tautulli":        ["tag:docker"],
+			"svc:syncthing":       ["tag:docker"],
+			"svc:jellyseerr":      ["tag:docker"],
 		},
 
 		"routes": {
