@@ -244,6 +244,7 @@
 				"tag:web-ingress",
 				"tag:dns-server",
 				"tag:router",
+				"tag:tsidp",
 			],
 
 			"attr": ["funnel"],
