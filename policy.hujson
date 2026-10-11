@@ -80,7 +80,6 @@
 			"externalID":               "THAU34AqeD11CNTRL",
 			"allowIncomingConnections": true,
 			"allowExternalReferencesTo": [
-				"autogroup:admin",
 				"group:admin",
 				"tag:tsidp",
 				"tag:arr-stack",
@@ -95,7 +94,6 @@
 			"externalID":               "Tpst97fUsw11CNTRL",
 			"allowIncomingConnections": true,
 			"allowExternalReferencesTo": [
-				"autogroup:admin",
 				"group:admin",
 				"tag:tsidp",
 				"tag:arr-stack",
