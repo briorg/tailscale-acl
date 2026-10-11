@@ -54,6 +54,9 @@
 		// tsidp node
 		"tag:tsidp": [],
 
+		// arr stack
+		"tag:arr-stack": ["group:arr-admin"],
+
 		"tag:docker":           ["group:komodo-admin"],
 		"tag:terraform":        [],
 		"tag:github-runner":    [],
@@ -64,18 +67,46 @@
 		"tag:op-connect":       [],
 		"tag:prod":             [],
 		"tag:router":           [],
-		"tag:traefik":          [],
-		"tag:traefik-redis":    [],
-		"tag:traefik-kop":      [],
-		"tag:tsdproxy":         [],
 
 		// tailscale ssh recorder
 		"tag:ssh-recorder": [],
 
 		"tag:taildrive-share":   [],
 		"tag:taildrive-access":  [],
-		"tag:tailgator-webhook": [],
 	},
+
+  "externalTailnets": {
+	"iei": {
+	  "externalID": "THAU34AqeD11CNTRL",
+	  "allowIncomingConnections": true,
+	  "allowExternalReferencesTo": [
+		"autogroup:admin",
+		"group:admin",
+		"tag:tsidp",
+        "tag:arr-stack",
+		"tag:docker",
+		"tag:hypervisor",
+		"tag:komodo-core",
+		"tag:komodo-periphery",
+		"tag:router",
+	  ]
+	},
+    "perchnet": {
+      "externalID": "Tpst97fUsw11CNTRL",
+      "allowIncomingConnections": true,
+      "allowExternalReferencesTo": [
+		"autogroup:admin",
+		"group:admin",
+		"tag:tsidp",
+        "tag:arr-stack",
+		"tag:docker",
+		"tag:hypervisor",
+		"tag:komodo-core",
+		"tag:komodo-periphery",
+		"tag:router",
+      ]
+    }
+  },
 
 	"grants": [
 		// Allow all connections.
