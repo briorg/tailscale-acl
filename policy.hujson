@@ -13,6 +13,9 @@
 		"group:arr-admin":    ["b-@github", "bri1p@passkey", "b@ibeep.com"],
 		"group:arr-user":     ["b-@github", "bri1p@passkey", "b@ibeep.com"],
 
+		// Members who get full access to ieitransit and perchnet via declarative node sharing
+		"group:cross-tailnet": ["b-@github", "bri1p@passkey", "b@ibeep.com"],
+
 		// Can access DN42
 		"group:dn42-user": [
 			"b-@github",
@@ -81,6 +84,7 @@
 			"allowIncomingConnections": true,
 			"allowExternalReferencesTo": [
 				"group:admin",
+				"group:cross-tailnet",
 				"tag:tsidp",
 				"tag:arr-stack",
 				"tag:docker",
@@ -95,6 +99,7 @@
 			"allowIncomingConnections": true,
 			"allowExternalReferencesTo": [
 				"group:admin",
+				"group:cross-tailnet",
 				"tag:tsidp",
 				"tag:arr-stack",
 				"tag:docker",
@@ -111,6 +116,13 @@
 		// TODO: Comment this section out if you want to define specific restrictions.
 		{
 			"src": ["*"],
+			"dst": ["*"],
+			"ip":  ["*"],
+		},
+		{
+			// Allow cross-tailnet admins from ieitransit and perchnet full access to briorg
+			"src": ["group://iei/cross-tailnet", "group://perchnet/cross-tailnet"],
+
 			"dst": ["*"],
 			"ip":  ["*"],
 		},
@@ -173,6 +185,13 @@
 			"src": ["tag:komodo-core", "tag:komodo-periphery"],
 			"dst": ["tag:komodo-core", "tag:komodo-periphery"],
 			"ip":  ["*"],
+		},
+		{
+			// Allow perchnet's Komodo core to manage briorg's Komodo devices
+			"src": ["tag://perchnet/komodo-core"],
+
+			"dst": ["tag:komodo-core", "tag:komodo-periphery"],
+			"ip":  ["8120", "9120", "443"],
 		},
 		{
 			"src": ["*"],
