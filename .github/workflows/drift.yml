@@ -49,3 +49,4 @@ jobs:
           ts-oidc-client-id: ${{ vars.TS_OIDC_CLIENT_ID }}
           ts-oidc-audience: ${{ vars.TS_OIDC_AUDIENCE }}
           ts-tailnet: ${{ vars.TS_TAILNET }}
+          
